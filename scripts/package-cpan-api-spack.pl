@@ -28,6 +28,14 @@ my $dbg = 0;
 # are in Core or available in Spack by default.
 # Will also find the correct distribution if called with a module name that is
 # not the main module, e.g. LWP::Protocol::ftp will create perl-libwww-perl
+#
+# This script can't do magic.
+# You still have to add all non-Perl dependencies and look at the build.
+# If it is a pure Perl package with a standard build, most likely the created
+# packages will work without changes.
+# If there are any other dependencies (binaries, libraries), these will not be
+# picked up. If the build needs anything special, this is also not added
+# automatically.
 
 my $initial_mod = shift or die "Need a Perl module name, e.g. Test::More\n";
 ($initial_mod =~ /^[\w:_-]+$/) or die "Need a Perl module name, e.g. Test::More\n";

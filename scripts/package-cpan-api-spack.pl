@@ -41,6 +41,10 @@ use Software::LicenseUtils;
 # If a needed dependency is missing, the script will alert you to the fact and
 # stop.
 #
+# The option '-p' only creates the package without any other action.
+# The option '-t' only runs the testing part.
+# Both can be useful if something does not work for the automatic process.
+#
 # This script can't do magic.
 # You still have to add all non-Perl dependencies and look at the build.
 # If it is a pure Perl package with a standard build, most likely the created

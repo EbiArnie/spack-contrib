@@ -182,10 +182,12 @@ say "Finished for $new_spack_pkg";
 sub spack_license {
     my $licenses = shift;
 
-    return unless $licenses;
+    if (!$licenses or !@$licenses) {
+        return;
+    }
 
 
-    my $lic_spdx;
+    my $lic_spdx = [];
 
     for my $short_lic (@$licenses) {
         my @guesses = Software::LicenseUtils->guess_license_from_meta_key($short_lic);
@@ -193,6 +195,10 @@ sub spack_license {
         foreach (@guesses) {
             push @$lic_spdx, $_->spdx_expression;
         }
+    }
+    unless (@$lic_spdx) {
+        warn "No SPDX license found for any of: @$licenses";
+        return;
     }
 
     return join(" OR ", @$lic_spdx);
